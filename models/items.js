@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+
+const categorySchema = new mongoose.Schema({});
+
 const itemsSchema = new mongoose.Schema({
   ItemName: {
     type: String,
@@ -8,6 +11,17 @@ const itemsSchema = new mongoose.Schema({
   ItemPrice: {
     type: Number,
     required: true,
+  },
+  ItemDescription: {
+    type: String,
+  },
+  ItemImg: {
+    type: Image,
+  },
+  ItemCategory:{
+    type: String,
+      enum: ['Traditional chests', 'Boats', 'Palm leaves', 'Fridge magnets', 'Keychains'],// more will be added
+      required: true,
   },
 });
 
