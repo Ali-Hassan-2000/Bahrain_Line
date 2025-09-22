@@ -17,7 +17,8 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 
 // Controllers
 const authController = require('./controllers/auth.js');
-// add items, categories and user controllers here
+const itemsController = require('./controllers/items.js');
+const usersController = require('./controllers/users.js');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -57,14 +58,12 @@ app.get('/items', (req, res) => {
 
 // mount listings controller
 app.use('/auth', authController);
-// add user and items and category
-// app.use('/items', listingsController);
+app.use('/items', itemsController);
 
 /* ----------------------------------- ROUTES --------------------------------------- */
 // PROTECTED
-/*
 app.use('/users', isSignedIn, usersController);
-*/
+
 
 /* ----------------------------------- TCP --------------------------------------- */
 app.listen(port, () => {
