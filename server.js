@@ -18,7 +18,7 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 // Controllers
 const authController = require('./controllers/auth.js');
 const itemsController = require('./controllers/items.js');
-const usersController = require('./controllers/users.js');
+//const usersController = require('./controllers/users.js');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
@@ -50,11 +50,9 @@ app.use(
 app.use(passUserToView);
 
 // Default page for users and admins
-/*
-app.get('/items', (req, res) => {
-  res.render('index.ejs');
+app.get('/', (req, res) => {
+  res.render('items/index.ejs');
 });
- */
 
 // mount controllers
 app.use('/auth', authController);
@@ -62,7 +60,7 @@ app.use('/items', itemsController);
 
 /* ----------------------------------- ROUTES --------------------------------------- */
 // PROTECTED
-app.use('/users', isSignedIn, usersController);
+// app.use('/users', isSignedIn, usersController);
 
 
 /* ----------------------------------- TCP --------------------------------------- */

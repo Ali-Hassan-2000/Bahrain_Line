@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 
-const User = require('../models/user');
+const Admin = require('../models/admin');
 
 const router = express.Router();
 
@@ -14,7 +14,7 @@ router.get('/sign-in', (req, res) => { //render sign-in page
 });
 
 router.post('/sign-up', async (req, res) => { // create user in DB
-  const userInDatabase = await User.findOne({ username: req.body.username });
+  const userInDatabase = await Admin.findOne({ username: req.body.username });
 
   if (userInDatabase) { // username is taken
     return res.send('Username is taken');
@@ -27,7 +27,7 @@ router.post('/sign-up', async (req, res) => { // create user in DB
   const hashedPassword = bcrypt.hashSync(req.body.password, 10); // encrypte the password
   req.body.password = hashedPassword; // replace the password
 
-  const newUser = await User.create(req.body); // create the user
+  const newUser = await Admin.create(req.body); // create the user
 
   req.session.user = {
     username: newUser.username,
@@ -40,7 +40,7 @@ router.post('/sign-up', async (req, res) => { // create user in DB
 });
 
 router.post('/sign-in', async (req, res) => { // retrieve the user in DB
-  const userInDatabase = await User.findOne({ username: req.body.username });
+  const userInDatabase = await Admin.findOne({ username: req.body.username });
 
   if (!userInDatabase) { // username not found
     return res.send('Username is invalid');
