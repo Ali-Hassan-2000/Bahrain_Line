@@ -13,12 +13,12 @@ const itemsSchema = new mongoose.Schema({
     type: String,
   },
   ItemImg: {
-    type: Image,
+    type: String, // the path of the Img
   },
   ItemCategory:{
-    type: String,
-      enum: ['Traditional chests', 'Boats', 'Palm leaves', 'Fridge magnets', 'Keychains'],// more will be added
-      required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true,
   },
 });
 
