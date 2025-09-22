@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Item</title>
+  </head>
+  <body>
+    <%- include("../partials/_navbar.ejs"); %>
+
+    <h1>Add a new Item!</h1>
+
+    <form action="/items" method="POST">
+      
+      <label for="ItemName">Item name:</label>
+      <input type="text" name="ItemName" id="ItemName" />
+
+      <label for="ItemPrice">Item price:</label>
+      <input type="number" name="ItemPrice" id="ItemPrice" />
+
+      <label for="ItemDescription">Item description:</label>
+      <input type="text-area" name="ItemDescription" id="ItemDescription" />
+
+      <label for="ItemCategory">Item category:</label>
+        <select id="ItemCategory" name="ItemCategory">
+            <option value="Traditional chests">Traditional chests</option>
+            <option value="Boats">Boats</option>
+            <option value="Palm leaves">Palm leaves</option>
+            <option value="Fridge magnets">Fridge magnets</option>
+            <option value="Keychains">Keychains</option>
+        </select>
+
+      <button type="submit">Add Item</button>    
+    </form>
+
+    <%- include('../partials/_footer.ejs') %>
+  </body>
+</html>
