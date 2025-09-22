@@ -56,7 +56,7 @@ app.get('/items', (req, res) => {
 });
  */
 
-// mount listings controller
+// mount controllers
 app.use('/auth', authController);
 app.use('/items', itemsController);
 
