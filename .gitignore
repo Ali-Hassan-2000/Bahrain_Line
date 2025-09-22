@@ -1,8 +1,5 @@
 .env
 node_modules
 views
-models
-middleware
-controllers
 README.md
 server.js
