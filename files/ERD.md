@@ -16,6 +16,7 @@
 | ItemDescription   | String    |               |
 | ItemImg           | Image     |               |
 | ItemCategory      | String    |{requied: true}|
+| Owner             | ObjectId  |{requied: true}|
 
 ## Category Table
 | Field         | Type      | Options       |
@@ -28,3 +29,4 @@
 
 ### Relationships
 - **One-to-Many**: One Category can have many Items, but each Item belongs to one Category.
+- **One-to-Many**: One Admin can have many Items, but each Item belongs to one Admin.

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Item = require('../models/items');
+const Category = require('../models/category');
 /* ----------------------------------- ROUTES ------------------------------------------- */
 // Default page for users an admins
 router.get('/', (req, res) => {
@@ -13,6 +14,35 @@ router.get('/about.ejs', (req, res) => {
   res.render('items/about.ejs');
 });
 
+// render create item page
+router.get('/new', async (req, res) => {
+  try{
+    const categories = await Category.find(); // Fetch all categories
+
+    console.log(categories);
+
+    res.render('items/new.ejs', {
+      categories,
+    });
+    
+  } catch (error){
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+// handle create form
+router.post('/', async (req, res) => {
+  try{
+    req.body.owner = req.session.user._id;
+    req.body.ItemCategory = Category._id;
+    await Item.create(req.body);
+    res.redirect('/items');
+  } catch (error){
+    console.log(error);
+    res.redirect('/');
+  }
+});
 
 
 /* ----------------------------------- EXPORT ------------------------------------------- */

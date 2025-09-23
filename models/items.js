@@ -15,10 +15,15 @@ const itemsSchema = new mongoose.Schema({
   ItemImg: {
     type: String, // the path of the Img
   },
-  ItemCategory:{
+
+  ItemCategory:{ // refrences
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
     required: true,
+  },
+  Owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Admin',
   },
 });
 

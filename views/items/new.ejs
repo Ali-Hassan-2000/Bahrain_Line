@@ -13,22 +13,26 @@
     <form action="/items" method="POST">
       
       <label for="ItemName">Item name:</label>
-      <input type="text" name="ItemName" id="ItemName" />
+      <input type="text" name="ItemName" id="ItemName" required/>
 
       <label for="ItemPrice">Item price:</label>
-      <input type="number" name="ItemPrice" id="ItemPrice" />
+      <input type="number" name="ItemPrice" id="ItemPrice" step="0.01" required/>
 
       <label for="ItemDescription">Item description:</label>
-      <input type="text-area" name="ItemDescription" id="ItemDescription" />
+      <textarea name="ItemDescription" id="ItemDescription" rows="4" required></textarea>
 
       <label for="ItemCategory">Item category:</label>
-        <select id="ItemCategory" name="ItemCategory">
-            <option value="Traditional chests">Traditional chests</option>
-            <option value="Boats">Boats</option>
-            <option value="Palm leaves">Palm leaves</option>
-            <option value="Fridge magnets">Fridge magnets</option>
-            <option value="Keychains">Keychains</option>
+        <select id="ItemCategory" name="ItemCategory" required>
+            <option value="">Select a category</option>
+
+            <% categories.forEach(category => { %>
+                <option value="<%= category.CategoryName %>"> <%= category.CategoryName %></option>
+            <% }); %>
+
         </select>
+
+        <label for="ItemImg">Item img:</label>
+        <input type="file" name="ItemImg" id="ItemImg" accept="image/*" required />
 
       <button type="submit">Add Item</button>    
     </form>
