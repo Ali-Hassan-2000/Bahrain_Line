@@ -23,7 +23,19 @@ const itemsController = require('./controllers/items.js');
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI).then(async () => { // add then to fill categories
+
+  const predefinedCategories = [ // add more if nedded
+      { CategoryName: 'Traditional chests' },
+      { CategoryName: 'Boats' },
+      { CategoryName: 'Palm leaves' },
+      { CategoryName: 'Fridge magnets' },
+      { CategoryName: 'Keychains' }
+  ];
+
+  const Category = require('./models/category');
+  await Category.insertMany(predefinedCategories);
+});
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
@@ -61,7 +73,6 @@ app.use('/items', itemsController);
 /* ----------------------------------- ROUTES --------------------------------------- */
 // PROTECTED
 // app.use('/users', isSignedIn, usersController);
-
 
 /* ----------------------------------- TCP --------------------------------------- */
 app.listen(port, () => {

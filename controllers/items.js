@@ -17,14 +17,7 @@ router.get('/about.ejs', (req, res) => {
 // render create item page
 router.get('/new', async (req, res) => {
   try{
-    const categories = await Category.find(); // Fetch all categories
-
-    console.log(categories);
-
-    res.render('items/new.ejs', {
-      categories,
-    });
-    
+    res.render('items/new.ejs');
   } catch (error){
     console.log(error);
     res.redirect('/');
@@ -35,7 +28,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
   try{
     req.body.owner = req.session.user._id;
-    req.body.ItemCategory = Category._id;
+    req.body.ItemCategory = ItemCategory;
     await Item.create(req.body);
     res.redirect('/items');
   } catch (error){

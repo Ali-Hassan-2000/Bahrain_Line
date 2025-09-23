@@ -17,7 +17,7 @@ const itemsSchema = new mongoose.Schema({
   },
 
   ItemCategory:{ // refrences
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: 'Category',
     required: true,
   },
