@@ -21,7 +21,15 @@ const itemsSchema = new mongoose.Schema({
     ref: 'Category',
     required: true,
   },
+  ItemCategoryId:{ 
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+  },
   Owner: {
+    type: String,
+    ref: 'Admin',
+  },
+  OwnerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Admin',
   },
