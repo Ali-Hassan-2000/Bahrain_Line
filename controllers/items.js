@@ -85,24 +85,18 @@ router.post('/', async (req, res) => {
 });
 
 // render show item page
-/*
 router.get('/:itemId', async (req, res) => {
   try {
-    const populatedListings = await Listing.findById(req.params.listingId).populate('owner');
-
-    // let the user like only one time
-    const userHasFavorited = populatedListings.favoritedByUsers.some((user) => user.equals(req.session.user._id));
+    const showItem = await Item.findById(req.params.itemId);
 
     res.render('listings/show.ejs', {
-      listing: populatedListings,
-      userHasFavorited: userHasFavorited,
+      showItem,
     });
   } catch (error) {
     console.log(error);
     res.redirect('/');
   }
 });
-*/
 
 
 /* ----------------------------------- EXPORT ------------------------------------------- */

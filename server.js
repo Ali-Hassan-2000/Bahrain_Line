@@ -10,6 +10,7 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require("connect-mongo");
+// install multer (npm install multer)
 
 // Middlewares
 const isSignedIn = require("./middleware/is-signed-in.js");
