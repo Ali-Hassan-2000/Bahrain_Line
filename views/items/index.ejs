@@ -10,11 +10,24 @@
     <p>Check out our amazing products!</p>
 
     <%- include('../partials/_navbar.ejs') %>
-    <!-- include '../partials/_categories.ejs' -->
+    <%- include('../partials/_categories.ejs') %>
 
     <a href="/items/new_item"><button>Add new Item</button></a>
     <a href="/items/new_category"><button>Add new Category</button></a>
     
+    <ul>
+
+    </ul>
+
+    <% items.forEach((item) => { %>
+      <div>
+        <a href="/items/<%= item._id %>">
+          <img src="../../files/img/items/ <%= item.ItemImg %> " alt="">
+        </a>
+        <p>View more details</p>
+      </div>
+
+    <% }); %>
 
 
     <%- include('../partials/_footer.ejs') %>

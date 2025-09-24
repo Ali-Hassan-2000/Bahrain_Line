@@ -6,8 +6,21 @@ const Category = require('../models/category');
 const Admin = require('../models/admin');
 /* ----------------------------------- ROUTES ------------------------------------------- */
 // Default page for users an admins
-router.get('/', (req, res) => {
-  res.render('items/index.ejs');
+router.get('/', async (req, res) => {
+  try{
+    const categories = await Category.find(); // Fetch categories from the database
+    const items = await Item.find(); // Fetch items from the database
+    console.log(categories);
+    console.log(items);
+
+    res.render('items/index.ejs', {
+      categories,
+      items,
+    });
+  } catch (error){
+    console.log(error);
+    res.redirect('/');
+  }
 });
 
 // render about page for users and admins
@@ -71,6 +84,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+// render show item page
+/*
+router.get('/:itemId', async (req, res) => {
+  try {
+    const populatedListings = await Listing.findById(req.params.listingId).populate('owner');
+
+    // let the user like only one time
+    const userHasFavorited = populatedListings.favoritedByUsers.some((user) => user.equals(req.session.user._id));
+
+    res.render('listings/show.ejs', {
+      listing: populatedListings,
+      userHasFavorited: userHasFavorited,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+*/
 
 
 /* ----------------------------------- EXPORT ------------------------------------------- */
