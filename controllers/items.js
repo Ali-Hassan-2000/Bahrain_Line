@@ -112,5 +112,35 @@ router.delete('/:itemId', async (req, res) => {
     res.redirect('/');
   }
 });
+
+// render edit item page
+router.get('/:itemId/edit', async (req, res) => {
+  try {
+    const currentItem = await Item.findById(req.params.itemId);
+    const categories = await Category.find();
+    res.render('items/edit_item.ejs', {
+      item: currentItem,
+      categories,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+/*
+router.put('/:listingId', async (req, res) => {
+  try{
+    const currentListing = await Listing.findById(req.params.listingId);
+    await currentListing.updateOne(req.body);
+    res.redirect('/listings');
+  }
+  catch (error){
+    console.log(error);
+    res.redirect('/');
+  }
+});
+*/
+
 /* ----------------------------------- EXPORT ------------------------------------------- */
 module.exports = router;
