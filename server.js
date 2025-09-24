@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path') // for photos
 
 dotenv.config();
 const express = require('express');
@@ -10,7 +11,6 @@ const methodOverride = require('method-override');
 const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require("connect-mongo");
-// install multer (npm install multer)
 
 // Middlewares
 const isSignedIn = require("./middleware/is-signed-in.js");
@@ -48,6 +48,8 @@ app.use(
   })
 );
 app.use(passUserToView);
+
+app.use(express.static(path.join(__dirname, "public"))); // for photos
 
 const Category = require('./models/category.js');
 const Item = require('./models/items');

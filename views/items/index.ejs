@@ -17,8 +17,8 @@
     
     <% items.forEach((item) => { %>
       <div>
-        <a href="/items/<%= item._id %>"><!-- there is a problem with mongo DB file name (auto. adds %20 for spacing) -->
-          <img src="../../files/img/items/ <%= item.ItemImg %> " alt="item img">
+        <a href="/items/<%= item._id %>">
+          <img src="/img/items/<%= item.ItemImg %>" alt="item img">
         </a>
         <p>View more details</p>
       </div>
