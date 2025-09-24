@@ -49,9 +49,16 @@ app.use(
 );
 app.use(passUserToView);
 
+const Category = require('./models/category.js');
+const Item = require('./models/items');
 // Default page for users and admins
-app.get('/', (req, res) => {
-  res.render('items/index.ejs');
+app.get('/', async (req, res) => {
+  const categories = await Category.find(); // Fetch categories from the database
+  const items = await Item.find(); // Fetch items from the database
+  res.render('items/index.ejs',{
+    categories,
+    items,
+  });
 });
 
 // mount controllers

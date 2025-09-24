@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= item.ItemName %></title>
+    <title><%= showItem.ItemName %></title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <%- include('../partials/_categories.ejs') %>
 
-    <img src="../../files/img/items/ <%= item.ItemImg %> " alt="item_img">
+    <img src="../../files/img/items/ <%= showItem.ItemImg %> " alt="item_img">
 
     <h2>Details:</h2>
-    <p>Item name: <%= item.ItemName %></p>
-    <p>Item price: $<%= item.ItemPrice %></p>
-    <p>Category: <%= item.ItemCategory  %></p>
-    <p>Description: <%= item.ItemDescription  %></p>
+    <p>Item name: <%= showItem.ItemName %></p>
+    <p>Item price: $<%= showItem.ItemPrice %></p>
+    <p>Category: <%= showItem.ItemCategory  %></p>
+    <p>Description: <%= showItem.ItemDescription  %></p>
           
-    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete this listing</button>
+    <form action="/items/<%= showItem._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete this Item</button>
     </form>
       
-    <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
+    <a href="/items/<%= showItem._id %>/edit">Edit this Item</a>
 
   </body>
 </html>

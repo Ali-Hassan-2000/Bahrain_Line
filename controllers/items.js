@@ -87,9 +87,11 @@ router.post('/', async (req, res) => {
 // render show item page
 router.get('/:itemId', async (req, res) => {
   try {
+    const categories = await Category.find(); // Fetch categories from the database
     const showItem = await Item.findById(req.params.itemId);
 
-    res.render('listings/show.ejs', {
+    res.render('items/show_item.ejs', {
+      categories,
       showItem,
     });
   } catch (error) {
@@ -98,6 +100,17 @@ router.get('/:itemId', async (req, res) => {
   }
 });
 
-
+router.delete('/:itemId', async (req, res) => {
+  try{
+    const deleteItem = await Item.findById(req.params.itemId);
+    
+    await deleteItem.deleteOne();
+    res.redirect('/items'); // in the future change it to /items/:categoryId
+  
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
 /* ----------------------------------- EXPORT ------------------------------------------- */
 module.exports = router;
