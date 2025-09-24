@@ -11,6 +11,7 @@
     <h1>Add a new Item!</h1>
 
     <form action="/items" method="POST">
+      <input type="hidden" name="action" value="add_item" />
       
       <label for="ItemName">Item name:</label>
       <input type="text" name="ItemName" id="ItemName" required/>

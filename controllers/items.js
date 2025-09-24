@@ -16,11 +16,11 @@ router.get('/about.ejs', (req, res) => {
 });
 
 // render create item page
-router.get('/new', async (req, res) => {
+router.get('/new_item', async (req, res) => {
   try{
     const categories = await Category.find(); // Fetch categories from the database
 
-    res.render('items/new.ejs', {
+    res.render('items/new_item.ejs', {
       categories,
     });
   } catch (error){
@@ -29,28 +29,48 @@ router.get('/new', async (req, res) => {
   }
 });
 
-// handle create form
-router.post('/', async (req, res) => {
+// render create category page
+router.get('/new_category', async (req, res) => {
   try{
-    const category = await Category.findOne({ CategoryName: req.body.ItemCategory });
-    req.body.ItemCategoryId = category._id; // get the ItemCategoryId
-
-    const AdminCreate = await Admin.findOne({username: req.session.user.username});
-    req.body.ownerId = AdminCreate._id;
-
-    const AdminName = await Admin.findOne({username: req.session.user.username});
-    req.body.owner = AdminName.username;
-    
-    console.log(req.body);
-
-    await Item.create(req.body);
-
-    res.redirect('/items');
+    res.render('items/new_category.ejs');
   } catch (error){
     console.log(error);
     res.redirect('/');
   }
 });
+
+// handle create form for items and categories
+router.post('/', async (req, res) => {
+  try{
+    if (req.body.action === 'add_item') { // for item form
+      const category = await Category.findOne({ CategoryName: req.body.ItemCategory });
+      req.body.ItemCategoryId = category._id; // get the ItemCategoryId
+
+      const AdminCreate = await Admin.findOne({username: req.session.user.username});
+      req.body.ownerId = AdminCreate._id;
+
+      const AdminName = await Admin.findOne({username: req.session.user.username});
+      req.body.owner = AdminName.username;
+
+      await Item.create(req.body);
+      res.redirect('/items');
+    }
+
+    if (req.body.action === 'add_category') { // for category form    
+      const existingCategory = await Category.findOne({ CategoryName: req.body.CategoryName });
+
+      if (existingCategory) { // check if category exiset
+        return res.redirect('/items/new_category');
+      }
+      await Category.create(req.body);
+      res.redirect('/items');
+    }
+  } catch (error){
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
 
 
 /* ----------------------------------- EXPORT ------------------------------------------- */

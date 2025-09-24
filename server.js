@@ -18,12 +18,13 @@ const passUserToView = require("./middleware/pass-user-to-view.js");
 // Controllers
 const authController = require('./controllers/auth.js');
 const itemsController = require('./controllers/items.js');
-//const usersController = require('./controllers/users.js');
 
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : '3000';
 
-mongoose.connect(process.env.MONGODB_URI).then(async () => { // add then to fill categories
+mongoose.connect(process.env.MONGODB_URI);
+/*
+.then(async () => { // add then to fill categories
 
   const predefinedCategories = [ // add more if nedded
       { CategoryName: 'Traditional chests' },
@@ -40,6 +41,7 @@ mongoose.connect(process.env.MONGODB_URI).then(async () => { // add then to fill
     await Category.insertMany(predefinedCategories);
   }
 });
+*/
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
@@ -76,7 +78,6 @@ app.use('/items', itemsController);
 
 /* ----------------------------------- ROUTES --------------------------------------- */
 // PROTECTED
-// app.use('/users', isSignedIn, usersController);
 
 /* ----------------------------------- TCP --------------------------------------- */
 app.listen(port, () => {
