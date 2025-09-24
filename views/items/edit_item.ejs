@@ -11,17 +11,27 @@
 
     <form action="/items/<%= item._id %>?_method=PUT" method="POST">
 
-        <label for="streetAddress">Street address:</label>
-        <input type="text" name="streetAddress" id="street" value="<%= listing.streetAddress %>"/>
+      <label for="ItemName">Item name:</label>
+      <input type="text" name="ItemName" id="ItemName" value="<%= item.ItemName %>" required/>
 
-        <label for="city">City:</label>
-        <input type="text" name="city" id="city" value="<%= listing.city %>" />
-        
-        <label for="price">Price:</label>
-        <input type="number" name="price" id="price" value="<%= listing.price %>" min="0"/>
-        
-        <label for="size">Size:</label>
-        <input type="number" name="size" id="size" value="<%= listing.size %>" min="0"/>
+      <label for="ItemPrice">Item price:</label>
+      <input type="number" name="ItemPrice" id="ItemPrice" step="0.01" value="<%= item.ItemPrice %>" required/>
+
+      <label for="ItemDescription">Item description:</label>
+      <textarea name="ItemDescription" id="ItemDescription" rows="4" value="<%= item.ItemDescription %>" required></textarea>
+
+      <label for="ItemCategory">Item category:</label>
+        <select id="ItemCategory" name="ItemCategory" required>
+            <option value="<%= item.ItemCategory %>"><%= item.ItemCategory %></option>
+
+            <% categories.forEach(category => { %>
+                <option value="<%= category.CategoryName %>"><%= category.CategoryName %></option>
+            <% }); %>
+
+        </select>
+
+        <label for="ItemImg">Item img:</label>
+        <input type="file" name="ItemImg" id="ItemImg" accept="image/*" value="<%= item.ItemImg %>" required />
         
         <button type="submit">Edit Item</button>
     
