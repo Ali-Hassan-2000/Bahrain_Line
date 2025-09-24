@@ -1,14 +1,13 @@
-<div class="categories" style="text-align: center; margin: 20px 0;">
-    <h2>Select a Category</h2>
-    <ul style="list-style-type: none; padding: 0;">
+<nav>
+    <ul>
         <% categories.forEach(category => { %>
-            <li style="display: inline; margin: 0 15px;">
-                <a href="/categories/<%= category._id %>" style="text-decoration: none; color: #000;">
-                    <div style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
-                        <%= category.name %>
+            <li>
+                <a href="/categories/<%= category._id %>">
+                    <div>
+                        <%= category.CategoryName %>
                     </div>
                 </a>
             </li>
         <% }); %>
     </ul>
-</div>
+</nav>

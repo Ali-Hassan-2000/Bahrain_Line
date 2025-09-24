@@ -23,25 +23,6 @@ const itemsController = require('./controllers/items.js');
 const port = process.env.PORT ? process.env.PORT : '3000';
 
 mongoose.connect(process.env.MONGODB_URI);
-/*
-.then(async () => { // add then to fill categories
-
-  const predefinedCategories = [ // add more if nedded
-      { CategoryName: 'Traditional chests' },
-      { CategoryName: 'Boats' },
-      { CategoryName: 'Palm leaves' },
-      { CategoryName: 'Fridge magnets' },
-      { CategoryName: 'Keychains' }
-  ];
-
-  const Category = require('./models/category');
-  const existingCategories = await Category.find();
-
-  if (existingCategories.length === 0) { // if categories added before don't duplicate the same list
-    await Category.insertMany(predefinedCategories);
-  }
-});
-*/
 
 mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);

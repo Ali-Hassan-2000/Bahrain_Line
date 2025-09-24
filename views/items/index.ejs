@@ -15,14 +15,10 @@
     <a href="/items/new_item"><button>Add new Item</button></a>
     <a href="/items/new_category"><button>Add new Category</button></a>
     
-    <ul>
-
-    </ul>
-
     <% items.forEach((item) => { %>
       <div>
-        <a href="/items/<%= item._id %>">
-          <img src="../../files/img/items/ <%= item.ItemImg %> " alt="">
+        <a href="/items/<%= item._id %>"><!-- there is a problem with mongo DB file name (auto. adds %20 for spacing) -->
+          <img src="../../files/img/items/ <%= item.ItemImg %> " alt="item img">
         </a>
         <p>View more details</p>
       </div>
