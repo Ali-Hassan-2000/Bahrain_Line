@@ -87,7 +87,7 @@ router.post('/', async (req, res) => {
 // render show item page
 router.get('/:itemId', async (req, res) => {
   try {
-    const categories = await Category.find(); // Fetch categories from the database
+    const categories = await Category.find();
     const showItem = await Item.findById(req.params.itemId);
 
     res.render('items/show_item.ejs', {
@@ -100,6 +100,8 @@ router.get('/:itemId', async (req, res) => {
   }
 });
 
+// handle button for items and categories
+// category will be added later
 router.delete('/:itemId', async (req, res) => {
   try{
     const deleteItem = await Item.findById(req.params.itemId);
@@ -128,19 +130,28 @@ router.get('/:itemId/edit', async (req, res) => {
   }
 });
 
-/*
-router.put('/:listingId', async (req, res) => {
+// handle edit form for items
+router.put('/:itemId', async (req, res) => {
   try{
-    const currentListing = await Listing.findById(req.params.listingId);
-    await currentListing.updateOne(req.body);
-    res.redirect('/listings');
+    const currentItem = await Item.findById(req.params.itemId);
+
+    if (req.file) {
+      // If a new image is uploaded, use its path
+      req.body.ItemImg = req.file.path;
+    } else {
+      // Use the existing image path if no new image is uploaded
+      req.body.ItemImg = req.body.currentImage;
+    }
+
+    await currentItem.updateOne(req.body);
+    
+    res.redirect(`/items/${req.params.itemId}`);
   }
   catch (error){
     console.log(error);
     res.redirect('/');
   }
 });
-*/
 
 /* ----------------------------------- EXPORT ------------------------------------------- */
 module.exports = router;

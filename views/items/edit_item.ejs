@@ -18,7 +18,7 @@
       <input type="number" name="ItemPrice" id="ItemPrice" step="0.01" value="<%= item.ItemPrice %>" required/>
 
       <label for="ItemDescription">Item description:</label>
-      <textarea name="ItemDescription" id="ItemDescription" rows="4" required>value="<%= item.ItemDescription</textarea>
+      <textarea name="ItemDescription" id="ItemDescription" rows="4" required><%= item.ItemDescription %></textarea>
 
       <label for="ItemCategory">Item category:</label>
         <select id="ItemCategory" name="ItemCategory" required>
@@ -31,7 +31,10 @@
         </select>
 
         <label for="ItemImg">Item img:</label>
-        <input type="file" name="ItemImg" id="ItemImg" accept="image/*" value="<%= item.ItemImg %>" required />
+        <input type="file" name="ItemImg" id="ItemImg" accept="image/*"/>
+        <input type="hidden" name="currentImage" value="<%= item.ItemImg %>" /> 
+        <!-- if user didnt change the photo the app will use the previous one (type="file" can't display the path) -->
+        <img src="/img/items/<%= item.ItemImg %>" alt="Current Image"/>
         
         <button type="submit">Edit Item</button>
     
