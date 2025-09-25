@@ -170,22 +170,29 @@ router.get('/:Id/edit', async (req, res) => {
   }
 });
 
-// handle edit form for items
-router.put('/:itemId', async (req, res) => {
+// handle edit form for item and category
+router.put('/:Id', async (req, res) => {
   try{
-    const currentItem = await Item.findById(req.params.itemId);
+    const currentItem = await Item.findById(req.params.Id);
+    const currentCategory = await Category.findById(req.params.Id);
 
-    if (req.file) {
-      // If a new image is uploaded, use its path
-      req.body.ItemImg = req.file.path;
-    } else {
-      // Use the existing image path if no new image is uploaded
-      req.body.ItemImg = req.body.currentImage;
+    if(currentItem){
+      if (req.file) {
+        // If a new image is uploaded, use its path
+        req.body.ItemImg = req.file.path;
+      } else {
+        // Use the existing image path if no new image is uploaded
+        req.body.ItemImg = req.body.currentImage;
+      }
+      await currentItem.updateOne(req.body);
+      res.redirect(`/items/${req.params.Id}`);
     }
-
-    await currentItem.updateOne(req.body);
-    
-    res.redirect(`/items/${req.params.itemId}`);
+    if(currentCategory){
+      await currentCategory.updateOne(req.body);
+      await Item.updateMany({ItemCategory: currentCategory.CategoryName}, { $set: { ItemCategory: req.body.CategoryName}});
+      // here I get the items based on the previous category name, then update thier category name with the new
+      res.redirect(`/items/${req.params.Id}`);
+    }
   }
   catch (error){
     console.log(error);
