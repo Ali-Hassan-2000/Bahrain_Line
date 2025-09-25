@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit <%= category.CategoryName%></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Edit a Category!</h1>
+
+    <form action="/items/<%= category._id %>?_method=PUT" method="POST">
+
+        <label for="CategoryName">Category name:</label>
+        <input type="text" name="CategoryName" id="CategoryName" value="<%= category.CategoryName%>" required/>
+      
+        <button type="submit">Edit Category</button>   
+      
+    </form>
+
+  </body>
+</html>
