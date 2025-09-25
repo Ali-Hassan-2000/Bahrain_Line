@@ -10,10 +10,12 @@ router.get('/', async (req, res) => {
   try{
     const categories = await Category.find(); // Fetch categories from the database
     const items = await Item.find(); // Fetch items from the database
+    const IsAdmin = await Admin.findOne({username: req.session.user.username});
 
     res.render('items/index.ejs', {
       categories,
       items,
+      IsAdmin, // will be used later
     });
   } catch (error){
     console.log(error);
@@ -22,8 +24,16 @@ router.get('/', async (req, res) => {
 });
 
 // render about page for users and admins
-router.get('/about.ejs', (req, res) => {
-  res.render('items/about.ejs');
+router.get('/about.ejs', async (req, res) => {
+  try{
+    const IsAdmin = await Admin.findOne({username: req.session.user.username});
+    res.render('items/about.ejs', {
+      IsAdmin, // will be used later
+    });
+  } catch(error){
+    console.log(error);
+    res.redirect('/');
+  }
 });
 
 // render create item page
@@ -91,10 +101,13 @@ router.get('/:Id', async (req, res) => {
     const showItem = await Item.findById(req.params.Id);
     const showCategory = await Category.findById(req.params.Id);
 
+    const IsAdmin = await Admin.findOne({username: req.session.user.username});
+
     if(showItem){
       res.render('items/show_item.ejs', {
       categories,
       showItem,
+      IsAdmin, // will be used later
     });
     }
     if(showCategory){
@@ -102,6 +115,7 @@ router.get('/:Id', async (req, res) => {
       Items,
       showCategory,
       categories,
+      IsAdmin, // will be used later
     });
     }
   } catch (error) {
@@ -168,8 +182,6 @@ router.put('/:itemId', async (req, res) => {
     res.redirect('/');
   }
 });
-
-
 
 /* ----------------------------------- EXPORT ------------------------------------------- */
 module.exports = router;
