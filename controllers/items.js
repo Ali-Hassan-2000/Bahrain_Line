@@ -10,8 +10,6 @@ router.get('/', async (req, res) => {
   try{
     const categories = await Category.find(); // Fetch categories from the database
     const items = await Item.find(); // Fetch items from the database
-    console.log(categories);
-    console.log(items);
 
     res.render('items/index.ejs', {
       categories,
@@ -84,16 +82,28 @@ router.post('/', async (req, res) => {
   }
 });
 
-// render show item page
-router.get('/:itemId', async (req, res) => {
+// render show item page and show category page
+router.get('/:Id', async (req, res) => {
   try {
     const categories = await Category.find();
-    const showItem = await Item.findById(req.params.itemId);
+    const Items = await Item.find();
 
-    res.render('items/show_item.ejs', {
+    const showItem = await Item.findById(req.params.Id);
+    const showCategory = await Category.findById(req.params.Id);
+
+    if(showItem){
+      res.render('items/show_item.ejs', {
       categories,
       showItem,
     });
+    }
+    if(showCategory){
+      res.render('items/show_category.ejs', {
+      Items,
+      showCategory,
+      categories,
+    });
+    }
   } catch (error) {
     console.log(error);
     res.redirect('/');
@@ -101,14 +111,20 @@ router.get('/:itemId', async (req, res) => {
 });
 
 // handle button for items and categories
-// category will be added later
-router.delete('/:itemId', async (req, res) => {
+router.delete('/:Id', async (req, res) => {
   try{
-    const deleteItem = await Item.findById(req.params.itemId);
+    const deleteItem = await Item.findById(req.params.Id);
+    const deleteCategory = await Category.findById(req.params.Id);
     
-    await deleteItem.deleteOne();
-    res.redirect('/items'); // in the future change it to /items/:categoryId
-  
+    if(deleteItem){
+      await deleteItem.deleteOne();
+      res.redirect('/items');
+    }
+    if(deleteCategory){
+      await Item.deleteMany({ ItemCategoryId: deleteCategory._id });
+      await deleteCategory.deleteOne();
+      res.redirect('/items');
+    }
   } catch (error) {
     console.log(error);
     res.redirect('/');
@@ -152,6 +168,8 @@ router.put('/:itemId', async (req, res) => {
     res.redirect('/');
   }
 });
+
+
 
 /* ----------------------------------- EXPORT ------------------------------------------- */
 module.exports = router;

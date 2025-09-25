@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= showCategory.CategoryName %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <%- include('../partials/_categories.ejs') %>
+
+    <% Items.forEach((item) => { %>
+      <div>
+        <% if(item.ItemCategoryId.equals(showCategory._id)){ %>
+        <a href="/items/<%= item._id %>">
+          <img src="/img/items/<%= item.ItemImg %>" alt="item img">
+        </a>
+        <p>View more details</p>
+      <% } %>
+    </div>
+
+    <% }); %>
+
+    <form action="/items/<%= showCategory._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete this Category</button>
+    </form>
+      
+    <a href="/items/<%= showCategory._id %>/edit">Edit this Category</a>
+
+    <%- include('../partials/_footer.ejs') %>
+  </body>
+</html>
