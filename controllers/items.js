@@ -145,15 +145,25 @@ router.delete('/:Id', async (req, res) => {
   }
 });
 
-// render edit item page
-router.get('/:itemId/edit', async (req, res) => {
+// render edit item page and category page
+router.get('/:Id/edit', async (req, res) => {
   try {
-    const currentItem = await Item.findById(req.params.itemId);
+    const currentItem = await Item.findById(req.params.Id);
+    const currentCategory = await Category.findById(req.params.Id);
     const categories = await Category.find();
-    res.render('items/edit_item.ejs', {
+    
+    if(currentItem){
+      res.render('items/edit_item.ejs', {
       item: currentItem,
       categories,
     });
+    }
+    if(currentCategory){
+      res.render('items/edit_category.ejs', {
+      category: currentCategory,
+      categories,
+    });
+    }
   } catch (error) {
     console.log(error);
     res.redirect('/');
