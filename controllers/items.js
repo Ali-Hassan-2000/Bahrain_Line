@@ -10,12 +10,10 @@ router.get('/', async (req, res) => {
   try{
     const categories = await Category.find(); // Fetch categories from the database
     const items = await Item.find(); // Fetch items from the database
-    const IsAdmin = await Admin.findOne({username: req.session.user.username});
 
     res.render('items/index.ejs', {
       categories,
       items,
-      IsAdmin, // will be used later
     });
   } catch (error){
     console.log(error);
@@ -88,13 +86,10 @@ router.get('/:Id', async (req, res) => {
     const showItem = await Item.findById(req.params.Id);
     const showCategory = await Category.findById(req.params.Id);
 
-    const IsAdmin = await Admin.findOne({username: req.session.user.username});
-
     if(showItem){
       res.render('items/show_item.ejs', {
       categories,
       showItem,
-      IsAdmin, // will be used later
     });
     }
     if(showCategory){

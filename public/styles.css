@@ -101,6 +101,7 @@ header .navbar {
     align-items: center; 
     justify-content: space-between;
     margin-right: 27px;
+    margin-bottom: 20px;
 }
 
 #categories-container {
