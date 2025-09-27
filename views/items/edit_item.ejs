@@ -3,10 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css"> 
     <title>Edit <%= item.ItemName %></title>
   </head>
   <body>
-    <%- include('../partials/_navbar.ejs') %>
+    <header>
+      <nav class="navbar section-content">
+        <%- include('../partials/_navbar.ejs') %>
+      </nav>
+    </header>
+
     <h1>Edit a Item!</h1>
 
     <form action="/items/<%= item._id %>?_method=PUT" method="POST">

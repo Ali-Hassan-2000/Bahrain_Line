@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css"> 
     <title><%= showItem.ItemName %></title>
   </head>
   <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <%- include('../partials/_categories.ejs') %>
+    <header>
+      <nav class="navbar section-content">
+        <%- include('../partials/_navbar.ejs') %>
+      </nav>
+      <nav class="navbar">
+        <%- include('../partials/_categories.ejs') %>
+      </nav>
+    </header>
 
     <img src="/img/items/<%= showItem.ItemImg %>" alt="item_img">
 
@@ -23,5 +30,19 @@
       
     <a href="/items/<%= showItem._id %>/edit">Edit this Item</a>
 
+
+    <script>
+      document.getElementById('toggle-categories').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        const categoriesContainer = document.getElementById('categories-container');
+        if (categoriesContainer.style.display === 'none') {
+            categoriesContainer.style.display = 'block';
+            this.textContent = 'Hide Categories'; // Change button text
+        } else {
+            categoriesContainer.style.display = 'none';
+            this.textContent = 'Show Categories'; // Change button text back
+        }
+      });
+    </script>
   </body>
 </html>
