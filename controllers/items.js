@@ -23,19 +23,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// render about page for users and admins
-router.get('/about.ejs', async (req, res) => {
-  try{
-    const IsAdmin = await Admin.findOne({username: req.session.user.username});
-    res.render('items/about.ejs', {
-      IsAdmin, // will be used later
-    });
-  } catch(error){
-    console.log(error);
-    res.redirect('/');
-  }
-});
-
 // render create item page
 router.get('/new_item', async (req, res) => {
   try{

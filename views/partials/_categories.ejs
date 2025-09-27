@@ -1,13 +1,9 @@
-<nav>
-    <ul>
+<div id="categories-container" style="display: none;">
+    <ul class="nav-menu">
         <% categories.forEach(category => { %>
-            <li>
-                <a href="/items/<%= category._id %>">
-                    <div>
-                        <%= category.CategoryName %>
-                    </div>
-                </a>
+            <li class="nav-item">
+                <a href="/items/<%= category._id %>" class="nav-link"><%= category.CategoryName %></a>
             </li>
         <% }); %>
     </ul>
-</nav>
+</div>
