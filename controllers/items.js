@@ -4,6 +4,7 @@ const router = express.Router();
 const Item = require('../models/items');
 const Category = require('../models/category');
 const Admin = require('../models/admin');
+const isSignedIn = require('../middleware/is-signed-in');
 /* ----------------------------------- ROUTES ------------------------------------------- */
 // Default page for users an admins
 router.get('/', async (req, res) => {
@@ -97,7 +98,6 @@ router.get('/:Id', async (req, res) => {
       Items,
       showCategory,
       categories,
-      IsAdmin, // will be used later
     });
     }
   } catch (error) {
@@ -107,20 +107,21 @@ router.get('/:Id', async (req, res) => {
 });
 
 // handle button for items and categories
-router.delete('/:Id', async (req, res) => {
+router.delete('/:Id', isSignedIn, async (req, res) => {
   try{
     const deleteItem = await Item.findById(req.params.Id);
     const deleteCategory = await Category.findById(req.params.Id);
     
-    if(deleteItem){
-      await deleteItem.deleteOne();
-      res.redirect('/items');
-    }
-    if(deleteCategory){
-      await Item.deleteMany({ ItemCategoryId: deleteCategory._id });
-      await deleteCategory.deleteOne();
-      res.redirect('/items');
-    }
+      if(deleteItem){
+        await deleteItem.deleteOne();
+        res.redirect('/items');
+      }
+      if(deleteCategory){
+        await Item.deleteMany({ ItemCategoryId: deleteCategory._id });
+        await deleteCategory.deleteOne();
+        res.redirect('/items');
+      }
+
   } catch (error) {
     console.log(error);
     res.redirect('/');
@@ -128,24 +129,25 @@ router.delete('/:Id', async (req, res) => {
 });
 
 // render edit item page and category page
-router.get('/:Id/edit', async (req, res) => {
+router.get('/:Id/edit', isSignedIn, async (req, res) => {
   try {
     const currentItem = await Item.findById(req.params.Id);
     const currentCategory = await Category.findById(req.params.Id);
     const categories = await Category.find();
+  
+      if(currentItem){
+        res.render('items/edit_item.ejs', {
+        item: currentItem,
+        categories,
+        });
+      }
+      if(currentCategory){
+        res.render('items/edit_category.ejs', {
+        category: currentCategory,
+        categories,
+        });
+      }
     
-    if(currentItem){
-      res.render('items/edit_item.ejs', {
-      item: currentItem,
-      categories,
-    });
-    }
-    if(currentCategory){
-      res.render('items/edit_category.ejs', {
-      category: currentCategory,
-      categories,
-    });
-    }
   } catch (error) {
     console.log(error);
     res.redirect('/');
@@ -153,7 +155,7 @@ router.get('/:Id/edit', async (req, res) => {
 });
 
 // handle edit form for item and category
-router.put('/:Id', async (req, res) => {
+router.put('/:Id', isSignedIn, async (req, res) => {
   try{
     const currentItem = await Item.findById(req.params.Id);
     const currentCategory = await Category.findById(req.params.Id);

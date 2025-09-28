@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles.css"> 
     <title><%= showItem.ItemName %></title>
+    <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
+    <link rel="stylesheet" href="/styles.css"> 
   </head>
   <body>
     <header>
@@ -23,13 +24,14 @@
     <p>Item price: $<%= showItem.ItemPrice %></p>
     <p>Category: <%= showItem.ItemCategory  %></p>
     <p>Description: <%= showItem.ItemDescription  %></p>
-          
-    <form action="/items/<%= showItem._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete this Item</button>
-    </form>
+         
+    <% if(user){ %>
+      <form action="/items/<%= showItem._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete this Item</button>
+      </form>
       
-    <a href="/items/<%= showItem._id %>/edit">Edit this Item</a>
-
+      <a href="/items/<%= showItem._id %>/edit">Edit this Item</a>
+    <% } %>
 
     <script>
       document.getElementById('toggle-categories').addEventListener('click', function(event) {
