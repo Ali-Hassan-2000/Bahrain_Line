@@ -17,17 +17,25 @@
       </nav>
     </header>
 
-    <% Items.forEach((item) => { %>
-      <div>
-        <% if(item.ItemCategoryId.equals(showCategory._id)){ %>
-        <a href="/items/<%= item._id %>">
-          <img src="/img/items/<%= item.ItemImg %>" alt="item img">
-        </a>
-        <p>View more details</p>
-      <% } %>
-    </div>
-
-    <% }); %>
+    <main>
+      <section class="menu-section">
+        <div class="section-content">
+          <ul class="menu-list">
+            <% Items.forEach((item) => { %>
+              <% if(item.ItemCategoryId.equals(showCategory._id)){ %>
+                <li class="menu-item">
+                  <a href="/items/<%= item._id %>">
+                    <img src="/img/items/<%= item.ItemImg %>" alt="item img" class="menu-image">
+                    <h3 class="name"><%= item.ItemName %></h3>
+                    <h4 class="text"><%= item.ItemPrice %></h4>
+                  </a>
+                </li>
+              <% }; %>
+            <% }); %>
+          </ul>
+        </div>
+      </section>
+    </main>
 
     <% if(user){ %>
       <form action="/items/<%= showCategory._id %>?_method=DELETE" method="POST">
