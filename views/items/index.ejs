@@ -16,6 +16,7 @@
         <%- include('../partials/_categories.ejs') %>
       </nav>
     </header>
+
     <main>
       <section class="hero-section">
         <div class="section-content">
@@ -30,19 +31,24 @@
           </div>
         </div>
       </section>
+      
+      <section class="menu-section">
+        <h2 class="section-title">Check our products</h2>
+        <div class="section-content">
+          <ul class="menu-list">
+            <% items.forEach((item) => { %>
+              <li class="menu-item">
+                <a href="/items/<%= item._id %>">
+                <img src="/img/items/<%= item.ItemImg %>" alt="item img" class="menu-image">
+                <h3 class="name"><%= item.ItemName %></h3>
+                <h4 class="text"><%= item.ItemPrice %></h4>
+                </a>
+              </li>
+            <% }); %>
+          </ul>
+        </div>
+      </section>
     </main>
-
-
-        <% items.forEach((item) => { %>
-          <div class="item-card">
-            <a href="/items/<%= item._id %>">
-              <img src="/img/items/<%= item.ItemImg %>" alt="item img">
-            </a>
-            <p>View more details</p>
-          </div>
-        <% }); %>
-    
-
       <%- include('../partials/_footer.ejs') %>
 
 

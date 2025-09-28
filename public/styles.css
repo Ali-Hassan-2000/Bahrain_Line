@@ -165,32 +165,46 @@ header .navbar {
     margin-right: 30px;
 }
 /* ----------------about section-------------------*/
-
-/* ----------------responsive code for nav and-------------------*/
-@media screen and (max-width: 900px) {
-    :root {
-    --font-size-m: 1rem;
-    --font-size-l: 1.3rem;
-    --font-size-xl: 1.5rem;
-    --font-size-xxl: 1.8rem;
-    }   
-    
-    .navbar .nav-menu {
-        display: block;
-        position: fixed; 
-        left: 0; 
-        width: 300px;
-        height: 100%;
-        top: 0; 
-        flex-direction: column;
-        padding-top: 100px;
-        background: var(--white-color); 
-    }
-
-    .navbar .nav-menu .nav-link {
-        display: block; 
-        color: var(--dark-color);
-        margin-top: 17px; 
-        font-size: var(--font-size-l); 
-    }
+.menu-section {
+    color: var(--white-color);
+    background: var(--dark-color);
 }
+
+section .section-title {
+    font-size: var(--font-size-xl); /* Define font size using your variable */
+    color: var(--secondary-color); /* Use a color variable that fits your theme */
+    text-align: center; /* Center align the title */
+    margin-bottom: 20px; /* Space below the title */
+    font-weight: var(--font-weight-bold); /* Use a bold weight for emphasis */
+    text-transform: uppercase; /* Make text uppercase for a strong impact */
+    letter-spacing: 1px; /* Slightly increase letter spacing for readability */
+}
+
+.menu-section .menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 110px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.menu-section .menu-list .menu-item .menu-image {
+    max-width: 83%;
+    aspect-ratio: 1;
+}
+
+.menu-section .menu-list .menu-item a{
+    color: #fff;
+}
+
+.menu-section .menu-list .menu-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    width: calc(100% / 3 - 110px);
+}
+/* ----------------products-------------------*/
+
+/* ----------------footer-------------------*/
