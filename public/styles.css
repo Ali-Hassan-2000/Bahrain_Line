@@ -206,5 +206,33 @@ section .section-title {
     width: calc(100% / 3 - 110px);
 }
 /* ----------------products-------------------*/
+.footer-section {
+    padding: 20px 0; /* Padding on top and bottom */
+    background: var(--primary-color); /* Background color */
+}
 
+.footer-section .section-content {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    justify-content: space-around; /* Space items evenly */
+}
+
+.footer-section .copyright-text,
+.footer-section .social-link{
+    color: var(--white-color); /* Set text color to white */
+    transition: 0.2s ease;
+}
+
+.footer-section .social-link-list {
+    display: flex; /* Use flexbox layout */
+    gap: 25px; /* Space between social links */
+}
+
+.footer-section .social-link-list .social-link {
+    font-size: var(--font-size-1); /* Set font size using a CSS variable */
+}
+
+.footer-section .social-link-list .social-link:hover {
+    color: var(--secondary-color); /* Change color on hover */
+}
 /* ----------------footer-------------------*/
