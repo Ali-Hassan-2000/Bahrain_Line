@@ -279,13 +279,13 @@ section .section-title {
 .show-item-layout {
     display: flex; /* Use Flexbox for layout */
     max-width: 1200px; /* Maximum width for the container */
-    padding: 20px;
+    padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     background-color: var(--dark-color); /* White background for items */
 }
 
 .item-image {
-    flex: 1; /* Take up half the space */
+    flex: 1.5; /* Take up half the space */
     overflow: hidden; /* Hide overflow */
 }
 
@@ -296,22 +296,23 @@ section .section-title {
 
 .menu-details {
     flex: 1; /* Take up the other half */
-    padding: 20px; /* Add padding for spacing */
+    padding: 40px; /* Add padding for spacing */
     display: flex;
     flex-direction: column; /* Stack content vertically */
 }
 
-.menu-details h2 {
-    font-size: 1.5em; /* Title size */
-    margin-bottom: 10px; /* Space below title */
+.menu-details h1 {
+    font-family: initial;
 }
 
-.menu-details h3, .menu-details h4 {
+.menu-details h2{
     margin: 5px 0; /* Space between headings */
+    font-family: initial;
 }
 
 .menu-details p {
     margin-top: 10px; /* Space above description */
     line-height: 1.5; /* Improve readability */
+    font-family: initial;
 }
 /* ----------------show item-------------------*/
