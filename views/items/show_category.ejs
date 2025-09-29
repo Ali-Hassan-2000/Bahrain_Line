@@ -35,14 +35,17 @@
           </ul>
         </div>
       </section>
+      
     </main>
 
     <% if(user){ %>
-      <form action="/items/<%= showCategory._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete this Category</button>
-      </form>
-      
-      <a href="/items/<%= showCategory._id %>/edit">Edit this Category</a>
+      <div class="admin-actions">
+        <form action="/items/<%= showCategory._id %>?_method=DELETE" method="POST" class="delete-form">
+          <button type="submit" class="btn delete-btn">Delete this Category</button>
+        </form>
+        
+        <a href="/items/<%= showCategory._id %>/edit" class="btn edit-btn">Edit this Category</a>
+      </div>
     <% } %>
 
     <%- include('../partials/_footer.ejs') %>

@@ -236,3 +236,82 @@ section .section-title {
     color: var(--secondary-color); /* Change color on hover */
 }
 /* ----------------footer-------------------*/
+.admin-actions {
+    display: flex; /* Use flexbox for layout */
+    gap: 20px; /* Space between actions */
+    justify-content: center; /* Center the actions */
+    padding: 40px; /* Padding inside the box */
+    background: var(--dark-color); 
+}
+
+.delete-form {
+    margin: 0; /* Remove default margin */
+}
+
+.btn {
+    padding: 12px 20px; /* Add padding */
+    font-size: var(--font-size-m); /* Use defined font size */
+    border-radius: var(--border-radius-m); /* Rounded corners */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Pointer on hover */
+    transition: background 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.delete-btn {
+    background: var(--secondary-color); /* Background for delete button */
+    color: var(--white-color); /* Text color */
+}
+
+.delete-btn:hover {
+    background: darkred; /* Dark red on hover */
+}
+
+.edit-btn {
+    background: var(--primary-color); /* Background for edit button */
+    color: var(--white-color); /* Text color */
+}
+
+.edit-btn:hover {
+    background: darkred; /* Light pink on hover */
+}
+/* ----------------admin action-------------------*/
+/* Styles specific to the Show Item page */
+.show-item-layout {
+    display: flex; /* Use Flexbox for layout */
+    max-width: 1200px; /* Maximum width for the container */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: var(--dark-color); /* White background for items */
+}
+
+.item-image {
+    flex: 1; /* Take up half the space */
+    overflow: hidden; /* Hide overflow */
+}
+
+.item-image img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.menu-details {
+    flex: 1; /* Take up the other half */
+    padding: 20px; /* Add padding for spacing */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+}
+
+.menu-details h2 {
+    font-size: 1.5em; /* Title size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.menu-details h3, .menu-details h4 {
+    margin: 5px 0; /* Space between headings */
+}
+
+.menu-details p {
+    margin-top: 10px; /* Space above description */
+    line-height: 1.5; /* Improve readability */
+}
+/* ----------------show item-------------------*/

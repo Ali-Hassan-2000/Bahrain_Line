@@ -23,12 +23,12 @@ router.get('/', async (req, res) => {
 });
 
 // render create item page
-router.get('/new_item', async (req, res) => {
+router.get('/new_item', isSignedIn, async (req, res) => {
   try{
-    const categories = await Category.find(); // Fetch categories from the database
+      const categories = await Category.find(); // Fetch categories from the database
 
-    res.render('items/new_item.ejs', {
-      categories,
+      res.render('items/new_item.ejs', {
+        categories,
     });
   } catch (error){
     console.log(error);
@@ -37,7 +37,7 @@ router.get('/new_item', async (req, res) => {
 });
 
 // render create category page
-router.get('/new_category', async (req, res) => {
+router.get('/new_category', isSignedIn, async (req, res) => {
   try{
     res.render('items/new_category.ejs');
   } catch (error){
@@ -47,7 +47,7 @@ router.get('/new_category', async (req, res) => {
 });
 
 // handle create form for items and categories
-router.post('/', async (req, res) => {
+router.post('/', isSignedIn, async (req, res) => {
   try{
     if (req.body.action === 'add_item') { // for item form
       const category = await Category.findOne({ CategoryName: req.body.ItemCategory });

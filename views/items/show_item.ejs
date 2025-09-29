@@ -17,21 +17,34 @@
       </nav>
     </header>
 
-    <img src="/img/items/<%= showItem.ItemImg %>" alt="item_img">
-
-    <h2>Details:</h2>
-    <p>Item name: <%= showItem.ItemName %></p>
-    <p>Item price: $<%= showItem.ItemPrice %></p>
-    <p>Category: <%= showItem.ItemCategory  %></p>
-    <p>Description: <%= showItem.ItemDescription  %></p>
+    <main>
+      <section class="menu-section">
+        <div class="section-content item-container show-item-layout">
+          <div class="item-image">
+            <img src="/img/items/<%= showItem.ItemImg %>" alt="item_img">
+          </div>
+          <div class="menu-details">
+            <h2>Details:</h2>
+            <h3>Item name: <%= showItem.ItemName %></h3>
+            <h4>Item price: $<%= showItem.ItemPrice %></h4>
+            <h4>Category: <%= showItem.ItemCategory  %></h4>
+            <p>Description: <%= showItem.ItemDescription  %></p>
+          </div>
+        </div>
+      </section>
+    </main>
          
     <% if(user){ %>
-      <form action="/items/<%= showItem._id %>?_method=DELETE" method="POST">
-        <button type="submit">Delete this Item</button>
-      </form>
-      
-      <a href="/items/<%= showItem._id %>/edit">Edit this Item</a>
+      <div class="admin-actions">
+         <form action="/items/<%= showItem._id %>?_method=DELETE" method="POST" class="delete-form">
+          <button type="submit" class="btn delete-btn">Delete this Item</button>
+        </form>
+        
+        <a href="/items/<%= showItem._id %>/edit" class="btn edit-btn">Edit this Item</a>
+      </div>
     <% } %>
+
+    <%- include('../partials/_footer.ejs') %>
 
     <script>
       document.getElementById('toggle-categories').addEventListener('click', function(event) {
