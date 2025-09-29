@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 router.get('/new_item', isSignedIn, async (req, res) => {
   try{
       const categories = await Category.find(); // Fetch categories from the database
-
+      
       res.render('items/new_item.ejs', {
         categories,
     });
@@ -39,7 +39,11 @@ router.get('/new_item', isSignedIn, async (req, res) => {
 // render create category page
 router.get('/new_category', isSignedIn, async (req, res) => {
   try{
-    res.render('items/new_category.ejs');
+    const categories = await Category.find();
+
+    res.render('items/new_category.ejs', {
+      categories,
+    });
   } catch (error){
     console.log(error);
     res.redirect('/');

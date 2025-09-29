@@ -3,11 +3,9 @@
 - [✓] Task 3: Set up Github 
 - [✓] Task 4: Implement the main features
 - [✓] Task 5: Implement the functions
-- [X] Task 6: UI update functions (language, currency)
-- [X] Task 7: Design the app interface
-- [X] Task 8: add items (pics) and categories
-- [X] Task 9: remove test links (sign-in, sign-up)
-- [X] Task 10: add backOffice app (supplier app)
-- [X] Task 11: add functions for backOffice 
-- [X] Task 12: Design backOffice app
-- [X] Task 13: Prepare documentation
+- [✓] Task 6: Design the app interface
+- [X] Task 7: add items (pics) and categories
+- [X] Task 8: add backOffice app (supplier app)
+- [X] Task 9: add functions for backOffice 
+- [X] Task 10: Design backOffice app
+- [X] Task 11: Prepare documentation
