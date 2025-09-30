@@ -44,7 +44,7 @@
         <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg" accept="image/*"/>
 
         <div id="image-preview-container" style="margin-top: 20px;">
-
+          <h2 class="sign-in-label">Image Preview:</h2>
           <input type="hidden" name="currentImage" value="<%= item.ItemImg %>" /> 
           <!-- if user didnt change the photo the app will use the previous one (type="file" can't display the path) -->
           <img src="/img/items/<%= item.ItemImg %>" alt="Current Image"/>
