@@ -316,3 +316,73 @@ section .section-title {
     font-family: initial;
 }
 /* ----------------show item-------------------*/
+.sign-in-container {
+    background-color: var(--primary-color);
+    padding: 40px;
+    border-radius: var(--border-radius-m);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    width: 350px; /* Slightly wider for better layout */
+    text-align: center;
+    margin: auto; /* Center the container */
+    position: relative; /* Positioning for the background image */
+}
+
+.sign-in-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('path/to/your/background-image.jpg'); /* Add a background image */
+    background-size: cover;
+    opacity: 0.1; /* Slight opacity for a subtle background */
+    border-radius: var(--border-radius-m);
+    z-index: -1; /* Send the background behind the container */
+}
+
+.sign-in-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+    font-family: 'Miniver', sans-serif;
+}
+
+.sign-in-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: var(--font-size-n);
+    color: var(--white-color);
+}
+
+.sign-in-input {
+    width: 100%;
+    padding: 12px; /* More padding for comfort */
+    margin-bottom: 20px;
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--border-radius-s);
+    background-color: var(--light-pink-color);
+    color: var(--dark-color);
+    transition: border 0.3s ease;
+}
+
+.sign-in-input:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+}
+
+.sign-in-button {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    border: none;
+    padding: 14px 20px; /* Increased padding for buttons */
+    border-radius: var(--border-radius-m);
+    cursor: pointer;
+    font-size: var(--font-size-m);
+    transition: background 0.3s ease;
+}
+
+.sign-in-button:hover {
+    background-color: darkred;
+}
+/* ----------------sign pages-------------------*/
