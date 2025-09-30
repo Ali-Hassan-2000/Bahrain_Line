@@ -161,7 +161,7 @@ header .navbar {
 }
 
 .hero-section .hero-image-wrapper {
-    max-width: 500px; 
+    max-width: 650px; 
     margin-right: 30px;
 }
 /* ----------------about section-------------------*/
@@ -189,7 +189,7 @@ section .section-title {
 }
 
 .menu-section .menu-list .menu-item .menu-image {
-    max-width: 83%;
+    max-width: 90%;
     aspect-ratio: 1;
 }
 

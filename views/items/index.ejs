@@ -5,7 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bahrain line</title>
     <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
-    <link rel="stylesheet" href="/styles.css"> 
+    <link rel="stylesheet" href="/styles.css">
+    
+    <style>
+        .hero-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* Adjust as needed */
+            height: 450px; /* Adjust as needed */
+        }
+
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            border-radius: 20px; 
+        }
+
+        .hero-image.active {
+            opacity: 1;
+        }
+    </style>
   </head>
   <body>
     <header>
@@ -22,12 +45,15 @@
         <div class="section-content">
           <div class="hero-details">
             <h2 class="title">Bahrain line</h2>
-            <h3 class="subtitle">Make your day great with our special items</h3>
-            <p class="description">Welcome to our traditional shop, where every hiertage tells 
-              a story and every item sparks joy.</p>
+            <h3 class="subtitle">Crafted with Love and Tradition</h3>
+            <p class="description">At our shop, we celebrate the rich heritage of Bahrain through 
+              beautifully crafted items. Each piece tells a story and brings a touch of tradition 
+              into your home.</p>
           </div>
           <div class="hero-image-wrapper">
-            <img src="img/about/1.jpg" alt="Hero" class="hero-image">
+            <img src="img/about/1.jpg" alt="Hero" class="hero-image active">
+            <img src="img/about/2.jpg" alt="Hero" class="hero-image">
+            <img src="img/about/3.jpg" alt="Hero" class="hero-image">
           </div>
         </div>
       </section>
@@ -64,6 +90,17 @@
             this.textContent = 'Show Categories'; // Change button text back
         }
       });
+
+      // Image carousel logic
+      const images = document.querySelectorAll('.hero-image');
+      let currentIndex = 0;
+      function showNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }
+
+      setInterval(showNextImage, 3000); // Change image every 3 seconds
     </script>
   </body>
   </html>
