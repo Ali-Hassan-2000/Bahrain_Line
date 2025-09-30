@@ -15,6 +15,9 @@ const itemsSchema = new mongoose.Schema({
   ItemImg: {
     type: String, // the path of the Img
   },
+  ItemImgs: { 
+    type: [String],
+  },
 
   ItemCategory:{ // refrences
     type: String,
