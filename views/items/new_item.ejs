@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
     <link rel="stylesheet" href="/styles.css"> 
   </head>
-  <body>
+  <body style="background-color: var(--dark-color);">
     <header>
       <nav class="navbar section-content">
         <%- include('../partials/_navbar.ejs') %>
@@ -17,36 +17,43 @@
         <%- include('../partials/_categories.ejs') %>
       </nav>
     </header> 
+	
+    <div class="sign-in-container">	
+    	<h1 class="sign-in-title">Add a new Item!</h1>
 
-    <h1>Add a new Item!</h1>
-
-    <form action="/items" method="POST">
-      <input type="hidden" name="action" value="add_item" />
+    	<form action="/items" method="POST">
+      		<input type="hidden" name="action" value="add_item" />
       
-      <label for="ItemName">Item name:</label>
-      <input type="text" name="ItemName" id="ItemName" required/>
+      		<label class="sign-in-label" for="ItemName">Item name:</label>
+      		<input class="sign-in-input" type="text" name="ItemName" id="ItemName" required/>
 
-      <label for="ItemPrice">Item price:</label>
-      <input type="number" name="ItemPrice" id="ItemPrice" step="0.01" required/>
+      		<label class="sign-in-label" for="ItemPrice">Item price:</label>
+      		<input class="sign-in-input" type="number" name="ItemPrice" id="ItemPrice" step="0.01" required/>
 
-      <label for="ItemDescription">Item description:</label>
-      <textarea name="ItemDescription" id="ItemDescription" rows="4" required></textarea>
+      		<label class="sign-in-label" for="ItemDescription">Item description:</label>
+      		<textarea class="sign-in-input" name="ItemDescription" id="ItemDescription" rows="4" required></textarea>
 
-      <label for="ItemCategory">Item category:</label>
-        <select id="ItemCategory" name="ItemCategory" required>
-            <option value="">Select a category</option>
+      		<label class="sign-in-label" for="ItemCategory">Item category:</label>
+        	<select class="sign-in-input" id="ItemCategory" name="ItemCategory" required>
+            		<option value="">Select a category</option>
 
-            <% categories.forEach(category => { %>
-                <option value="<%= category.CategoryName %>"><%= category.CategoryName %></option>
-            <% }); %>
+            		<% categories.forEach(category => { %>
+                		<option value="<%= category.CategoryName %>"><%= category.CategoryName %></option>
+            		<% }); %>
 
-        </select>
+        	</select>
 
-        <label for="ItemImg">Item img:</label>
-        <input type="file" name="ItemImg" id="ItemImg" accept="image/*" required />
+        	<label class="sign-in-label" for="ItemImg">Item img:</label>
+        	<input class="sign-in-input" type="file" name="ItemImg" id="ItemImg" accept="image/*" required />
 
-      <button type="submit">Add Item</button>    
-    </form>
+          <div id="image-preview-container" style="margin-top: 20px; display: none;">
+              <h2>Image Preview:</h2>
+              <img id="image-preview" src="" alt="Image Preview" style="max-width: 100%; border: 1px solid #ccc; border-radius: 4px;" />
+          </div>
+
+      		<button class="sign-in-button" type="submit">Add Item</button>    
+    	</form>
+    </div>
 
     <%- include('../partials/_footer.ejs') %>
 
@@ -60,6 +67,23 @@
         } else {
             categoriesContainer.style.display = 'none';
             this.textContent = 'Show Categories'; // Change button text back
+        }
+      });
+
+      document.getElementById('ItemImg').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const imagePreview = document.getElementById('image-preview');
+        const imagePreviewContainer = document.getElementById('image-preview-container');
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            imagePreview.src = e.target.result; // Set the image source to the uploaded file
+            imagePreviewContainer.style.display = 'block'; // Show the preview container
+          };
+          reader.readAsDataURL(file); // Read the file as a data URL
+        } else {
+          imagePreviewContainer.style.display = 'none'; // Hide the preview if no file is selected
         }
       });
     </script>
