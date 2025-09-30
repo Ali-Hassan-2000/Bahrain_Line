@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
     <link rel="stylesheet" href="/styles.css"> 
   </head>
-  <body>
+  <body style="background-color: var(--dark-color);">
     <header>
       <nav class="navbar section-content">
         <%- include('../partials/_navbar.ejs') %>
@@ -17,17 +17,19 @@
       </nav>
     </header>
 
-    <h1>Add a new Category!</h1>
+    <div class="sign-in-container">
+      <h1 class="sign-in-title">Add a new Category!</h1>
 
-    <form action="/items" method="POST">
-        <input type="hidden" name="action" value="add_category" />
-      
-      <label for="CategoryName">Category name:</label>
-      <input type="text" name="CategoryName" id="CategoryName" required/>
+      <form action="/items" method="POST">
+          <input type="hidden" name="action" value="add_category" />
+        
+        <label class="sign-in-label" for="CategoryName">Category name:</label>
+        <input class="sign-in-input" type="text" name="CategoryName" id="CategoryName" required/>
 
-      <button type="submit">Add Category</button>    
-    </form>
-
+        <button class="sign-in-button" type="submit">Add Category</button>    
+      </form>
+    </div>
+    
     <%- include('../partials/_footer.ejs') %>
 
     <script>

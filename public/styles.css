@@ -325,6 +325,8 @@ section .section-title {
     text-align: center;
     margin: auto; /* Center the container */
     position: relative; /* Positioning for the background image */
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .sign-in-container::before {
