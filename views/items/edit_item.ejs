@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
     <link rel="stylesheet" href="/styles.css"> 
   </head>
-  <body>
+  <body style="background-color: var(--dark-color);">
     <header>
       <nav class="navbar section-content">
         <%- include('../partials/_navbar.ejs') %>
@@ -17,38 +17,45 @@
       </nav>
     </header>
 
-    <h1>Edit a Item!</h1>
+    <div class="sign-in-container">
+      <h1 class="sign-in-title">Edit a Item!</h1>
+      <form action="/items/<%= item._id %>?_method=PUT" method="POST">
 
-    <form action="/items/<%= item._id %>?_method=PUT" method="POST">
+        <label class="sign-in-label" for="ItemName">Item name:</label>
+        <input class="sign-in-input" type="text" name="ItemName" id="ItemName" value="<%= item.ItemName %>" required/>
 
-      <label for="ItemName">Item name:</label>
-      <input type="text" name="ItemName" id="ItemName" value="<%= item.ItemName %>" required/>
+        <label class="sign-in-label" for="ItemPrice">Item price:</label>
+        <input class="sign-in-input" type="number" name="ItemPrice" id="ItemPrice" step="0.01" value="<%= item.ItemPrice %>" required/>
 
-      <label for="ItemPrice">Item price:</label>
-      <input type="number" name="ItemPrice" id="ItemPrice" step="0.01" value="<%= item.ItemPrice %>" required/>
+        <label class="sign-in-label" for="ItemDescription">Item description:</label>
+        <textarea class="sign-in-input" name="ItemDescription" id="ItemDescription" rows="4" required><%= item.ItemDescription %></textarea>
 
-      <label for="ItemDescription">Item description:</label>
-      <textarea name="ItemDescription" id="ItemDescription" rows="4" required><%= item.ItemDescription %></textarea>
+        <label class="sign-in-label" for="ItemCategory">Item category:</label>
+        <select class="sign-in-input" id="ItemCategory" name="ItemCategory" required>
+          <option value="<%= item.ItemCategory %>"><%= item.ItemCategory %></option>
 
-      <label for="ItemCategory">Item category:</label>
-        <select id="ItemCategory" name="ItemCategory" required>
-            <option value="<%= item.ItemCategory %>"><%= item.ItemCategory %></option>
-
-            <% categories.forEach(category => { %>
-                <option value="<%= category.CategoryName %>"><%= category.CategoryName %></option>
-            <% }); %>
+          <% categories.forEach(category => { %>
+            <option value="<%= category.CategoryName %>"><%= category.CategoryName %></option>
+          <% }); %>
 
         </select>
 
-        <label for="ItemImg">Item img:</label>
-        <input type="file" name="ItemImg" id="ItemImg" accept="image/*"/>
-        <input type="hidden" name="currentImage" value="<%= item.ItemImg %>" /> 
-        <!-- if user didnt change the photo the app will use the previous one (type="file" can't display the path) -->
-        <img src="/img/items/<%= item.ItemImg %>" alt="Current Image"/>
+        <label class="sign-in-label" for="ItemImg">Item img:</label>
+        <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg" accept="image/*"/>
+
+        <div id="image-preview-container" style="margin-top: 20px;">
+
+          <input type="hidden" name="currentImage" value="<%= item.ItemImg %>" /> 
+          <!-- if user didnt change the photo the app will use the previous one (type="file" can't display the path) -->
+          <img src="/img/items/<%= item.ItemImg %>" alt="Current Image"/>
+
+        </div>
         
-        <button type="submit">Edit Item</button>
+        <button class="sign-in-button" type="submit">Edit Item</button>
     
-    </form>
+      </form>
+
+    </div>
 
     <%- include('../partials/_footer.ejs') %>
 
