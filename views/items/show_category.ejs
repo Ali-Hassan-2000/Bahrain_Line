@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= showCategory.CategoryName %></title>
-    <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dnmdmz7qo/image/upload/v1759391673/shop_logo_g70q1m.png">
     <link rel="stylesheet" href="/styles.css"> 
   </head>
   <body>
@@ -25,7 +25,7 @@
               <% if(item.ItemCategoryId.equals(showCategory._id)){ %>
                 <li class="menu-item">
                   <a href="/items/<%= item._id %>">
-                    <img src="/img/items/<%= item.ItemImg %>" alt="item img" class="menu-image">
+                    <img src="<%= item.ItemImg[0].url %>" alt="item img" class="menu-image">
                     <h3 class="name"><%= item.ItemName %></h3>
                     <h4 class="text"><%= item.ItemPrice %></h4>
                   </a>
@@ -50,18 +50,7 @@
 
     <%- include('../partials/_footer.ejs') %>
 
-    <script>
-      document.getElementById('toggle-categories').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        const categoriesContainer = document.getElementById('categories-container');
-        if (categoriesContainer.style.display === 'none') {
-            categoriesContainer.style.display = 'block';
-            this.textContent = 'Hide Categories'; // Change button text
-        } else {
-            categoriesContainer.style.display = 'none';
-            this.textContent = 'Show Categories'; // Change button text back
-        }
-      });
-    </script>
+    <%- include('../partials/_toggle-categories.ejs') %>
+
   </body>
 </html>

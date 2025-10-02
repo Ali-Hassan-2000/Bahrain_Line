@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+const imagesSchema = new mongoose.Schema({
+  url: { type: String},
+  cloudinary_id: { type: String},
+});
+
 const itemsSchema = new mongoose.Schema({
   ItemName: {
     type: String,
@@ -12,12 +17,8 @@ const itemsSchema = new mongoose.Schema({
   ItemDescription: {
     type: String,
   },
-  ItemImg: {
-    type: String, // the path of the Img
-  },
-  ItemImgs: { 
-    type: [String],
-  },
+
+  ItemImg: [imagesSchema], //Embeded
 
   ItemCategory:{ // refrences
     type: String,

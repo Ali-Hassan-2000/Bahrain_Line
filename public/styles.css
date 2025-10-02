@@ -119,7 +119,7 @@ header .navbar {
 #categories-container .nav-menu .nav-link{
     padding: 10px 18px;
     color: var(--white-color);
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-s);
     border-radius: var(--border-radius-m);
     transition: 0.3s ease;
 }
@@ -278,20 +278,27 @@ section .section-title {
 /* Styles specific to the Show Item page */
 .show-item-layout {
     display: flex; /* Use Flexbox for layout */
-    max-width: 1200px; /* Maximum width for the container */
+    max-width: 1400px; /* Maximum width for the container */
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     background-color: var(--dark-color); /* White background for items */
 }
 
 .item-image {
-    flex: 1.5; /* Take up half the space */
-    overflow: hidden; /* Hide overflow */
+    width: 65%; /* Set the width to 75% of the page */
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow images to wrap */
+    justify-content: center; /* Center images horizontally */
+    margin: 0 auto; /* Center the container */
+    gap: 10px; /* Space between images */
 }
 
 .item-image img {
-    width: 100%; /* Make the image responsive */
+    width: 400px; /* Increase the width of images */
     height: auto; /* Maintain aspect ratio */
+    border: 20px solid black; /* Black border */
+    object-fit: cover; /* Ensure images fit within the defined width */
+    margin: 5px; /* Margin around each image */
 }
 
 .menu-details {
@@ -388,3 +395,10 @@ section .section-title {
     background-color: darkred;
 }
 /* ----------------sign pages-------------------*/
+.styled-image {
+  border: 7px solid black; /* Black border */
+  width: 60px; /* Make images smaller */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures images fit within the defined width */
+}
+/* ----------------show item images-------------------*/

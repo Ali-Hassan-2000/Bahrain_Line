@@ -5,6 +5,10 @@ const Item = require('../models/items');
 const Category = require('../models/category');
 const Admin = require('../models/admin');
 const isSignedIn = require('../middleware/is-signed-in');
+
+// for photos of the app (npm install multer multer-storage-cloudinary cloudinary)
+const upload = require('../config/multer')
+const cloudinary = require('../config/cloudinary')
 /* ----------------------------------- ROUTES ------------------------------------------- */
 // Default page for users an admins
 router.get('/', async (req, res) => {
@@ -51,7 +55,7 @@ router.get('/new_category', isSignedIn, async (req, res) => {
 });
 
 // handle create form for items and categories
-router.post('/', isSignedIn, async (req, res) => {
+router.post('/', isSignedIn, upload.array('ItemImg'), async (req, res) => {
   try{
     if (req.body.action === 'add_item') { // for item form
       const category = await Category.findOne({ CategoryName: req.body.ItemCategory });
@@ -62,9 +66,22 @@ router.post('/', isSignedIn, async (req, res) => {
 
       const AdminName = await Admin.findOne({username: req.session.user.username});
       req.body.owner = AdminName.username;
+ 
+      req.body.ItemImg = []; // Initialize ItemImg as an empty array
+      const itemImages = req.files; // Get the uploaded files
+      
+      /* we take the images from the form and store them in itemImages
+      then we push each image in the array and give it (url, image link string) 
+      and (_id, image cloud storage) */
+      itemImages.forEach(file => {
+        req.body.ItemImg.push({
+          url: file.path,
+          cloudinary_id: file.filename
+          });
+      });  
 
-      await Item.create(req.body);
-      res.redirect('/items');
+      const newItem = await Item.create(req.body);
+      res.redirect(`/items/${newItem._id}`);
     }
 
     if (req.body.action === 'add_category') { // for category form    
@@ -117,6 +134,14 @@ router.delete('/:Id', isSignedIn, async (req, res) => {
     const deleteCategory = await Category.findById(req.params.Id);
     
       if(deleteItem){
+
+        // Loop through all images and delete them from Cloudinary
+        for (const img of deleteItem.ItemImg) {
+          if (img.cloudinary_id) {
+            await cloudinary.uploader.destroy(img.cloudinary_id);
+          }
+        }
+
         await deleteItem.deleteOne();
         res.redirect('/items');
       }
@@ -159,20 +184,47 @@ router.get('/:Id/edit', isSignedIn, async (req, res) => {
 });
 
 // handle edit form for item and category
-router.put('/:Id', isSignedIn, async (req, res) => {
+router.put('/:Id', isSignedIn, upload.array('ItemImg'), async (req, res) => {
   try{
     const currentItem = await Item.findById(req.params.Id);
     const currentCategory = await Category.findById(req.params.Id);
 
     if(currentItem){
-      if (req.file) {
-        // If a new image is uploaded, use its path
-        req.body.ItemImg = req.file.path;
-      } else {
-        // Use the existing image path if no new image is uploaded
-        req.body.ItemImg = req.body.currentImage;
+
+    // Check if new images are uploaded
+    if (req.files && req.files.length > 0) {
+      // Delete old images from Cloudinary
+      for (const img of currentItem.ItemImg) {
+        if (img.cloudinary_id) {
+          await cloudinary.uploader.destroy(img.cloudinary_id);
+        }
       }
-      await currentItem.updateOne(req.body);
+
+      // Update ItemImg array with new images
+      currentItem.ItemImg = req.files.map(file => ({
+        url: file.path,
+        cloudinary_id: file.filename,
+      }));
+      } else {
+        // If no new images are uploaded, retain existing images
+        currentItem.ItemImg = currentItem.ItemImg.map((img, index) => ({
+          url: req.body[`currentImage${index + 1}`], // Use existing URL from hidden input
+          cloudinary_id: img.cloudinary_id // Keep existing Cloudinary ID
+        }));
+      }
+
+      // Update other fields from req.body
+      currentItem.ItemName = req.body.ItemName; 
+      currentItem.ItemPrice = req.body.ItemPrice; 
+      currentItem.ItemDescription = req.body.ItemDescription; 
+      currentItem.ItemCategory = req.body.ItemCategory; 
+      currentItem.ItemCategoryId = req.body.ItemCategoryId; 
+      currentItem.Owner = req.body.Owner; 
+      currentItem.OwnerId = req.body.OwnerId; 
+
+      // Save the updated item
+      await currentItem.save();
+      
       res.redirect(`/items/${req.params.Id}`);
     }
     if(currentCategory){

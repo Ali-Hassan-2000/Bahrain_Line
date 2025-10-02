@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit <%= item.ItemName %></title>
-    <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dnmdmz7qo/image/upload/v1759391673/shop_logo_g70q1m.png">
     <link rel="stylesheet" href="/styles.css"> 
   </head>
   <body style="background-color: var(--dark-color);">
@@ -19,7 +19,7 @@
 
     <div class="sign-in-container">
       <h1 class="sign-in-title">Edit a Item!</h1>
-      <form action="/items/<%= item._id %>?_method=PUT" method="POST">
+      <form action="/items/<%= item._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
 
         <label class="sign-in-label" for="ItemName">Item name:</label>
         <input class="sign-in-input" type="text" name="ItemName" id="ItemName" value="<%= item.ItemName %>" required/>
@@ -40,17 +40,23 @@
 
         </select>
 
-        <label class="sign-in-label" for="ItemImg">Item img:</label>
-        <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg" accept="image/*"/>
-
-        <div id="image-preview-container" style="margin-top: 20px;">
-          <h2 class="sign-in-label">Image Preview:</h2>
-          <input type="hidden" name="currentImage" value="<%= item.ItemImg %>" /> 
-          <!-- if user didnt change the photo the app will use the previous one (type="file" can't display the path) -->
-          <img src="/img/items/<%= item.ItemImg %>" alt="Current Image"/>
-
-        </div>
+        <label class="sign-in-label" for="ItemImg1">Item img 1:</label> 
+        <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg1" accept="image/*"/>
+        <input type="hidden" name="currentImage1" value="<%= item.ItemImg[0].url %>" /> 
+        <!-- <p>Current Image 1: <%= item.ItemImg[0].url %></p> Display for debugging -->
         
+        <label class="sign-in-label" for="ItemImg2">Item img 2:</label> 
+        <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg2" accept="image/*"/>
+        <input type="hidden" name="currentImage2" value="<%= item.ItemImg[1] ? item.ItemImg[1].url : '' %>" /> 
+        <!-- <p>Current Image 2: <%= item.ItemImg[1] ? item.ItemImg[1].url : 'No image available' %></p> -->>
+        <label class="sign-in-label" for="ItemImg3">Item img 3:</label> 
+        <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg3" accept="image/*"/>
+        <input type="hidden" name="currentImage3" value="<%= item.ItemImg[2] ? item.ItemImg[2].url : '' %>" /> 
+
+        <label class="sign-in-label" for="ItemImg4">Item img 4:</label> 
+        <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg4" accept="image/*"/>
+        <input type="hidden" name="currentImage4" value="<%= item.ItemImg[3] ? item.ItemImg[3].url : '' %>" /> 
+
         <button class="sign-in-button" type="submit">Edit Item</button>
     
       </form>
@@ -59,19 +65,6 @@
 
     <%- include('../partials/_footer.ejs') %>
 
-    <script>
-      document.getElementById('toggle-categories').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        const categoriesContainer = document.getElementById('categories-container');
-        if (categoriesContainer.style.display === 'none') {
-            categoriesContainer.style.display = 'block';
-            this.textContent = 'Hide Categories'; // Change button text
-        } else {
-            categoriesContainer.style.display = 'none';
-            this.textContent = 'Show Categories'; // Change button text back
-        }
-      });
-    </script>
-
+    <%- include('../partials/_toggle-categories.ejs') %> 
   </body>
 </html>

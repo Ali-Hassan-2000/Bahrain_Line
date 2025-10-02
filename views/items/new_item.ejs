@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Item</title>
-    <link rel="icon" type="image/png" href="img/logos/shop_logo.png">
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dnmdmz7qo/image/upload/v1759391673/shop_logo_g70q1m.png">
     <link rel="stylesheet" href="/styles.css"> 
   </head>
   <body style="background-color: var(--dark-color);">
@@ -21,7 +21,7 @@
     <div class="sign-in-container">	
     	<h1 class="sign-in-title">Add a new Item!</h1>
 
-    	<form action="/items" method="POST">
+    	<form action="/items" method="POST" enctype="multipart/form-data">
       		<input type="hidden" name="action" value="add_item" />
       
       		<label class="sign-in-label" for="ItemName">Item name:</label>
@@ -43,23 +43,17 @@
 
         	</select>
 
-        	<label class="sign-in-label" for="ItemImg">Item img:</label>
-        	<input class="sign-in-input" type="file" name="ItemImg" id="ItemImg" accept="image/*" required />
+          <label class="sign-in-label" for="ItemImg1">Item img 1:</label>
+          <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg1" accept="image/*" required/>
+                     
+          <label class="sign-in-label" for="ItemImg2">Item img 2:</label>
+          <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg2" accept="image/*"/>
+                        
+          <label class="sign-in-label" for="ItemImg3">Item img 3:</label>
+          <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg3" accept="image/*"/>
 
-          <div id="image-preview-container" style="margin-top: 20px; display: none;">
-            <h2 class="sign-in-label">Image Preview:</h2>
-            <img id="image-preview" src="" alt="Image Preview" style="max-width: 100%; border: 1px solid #ccc; border-radius: 4px;" />
-          </div>
-
-          <label class="sign-in-label" for="ItemImgs">Additional img:</label>
-        	<input class="sign-in-input" type="file" name="ItemImgs" id="ItemImgs" accept="image/*"/>
-
-          <button type="button" id="add-image-button" class="sign-in-button" style="margin-bottom: 20px;">Add Additional Image</button>
-
-          <div id="additional-images-preview-container" style="margin-top: 20px; display: none;">
-            <h2 class="sign-in-label">Images Preview:</h2>
-            <div id="additional-images-preview" style="display: flex; flex-wrap: wrap;"></div>
-          </div>
+          <label class="sign-in-label" for="ItemImg4">Item img 4:</label>
+          <input class="sign-in-input" type="file" name="ItemImg" id="ItemImg4" accept="image/*"/>
 
       		<button class="sign-in-button" type="submit">Add Item</button>    
     	</form>
@@ -67,77 +61,6 @@
 
     <%- include('../partials/_footer.ejs') %>
 
-    <script>
-      document.getElementById('toggle-categories').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default link behavior
-        const categoriesContainer = document.getElementById('categories-container');
-        if (categoriesContainer.style.display === 'none') {
-            categoriesContainer.style.display = 'block';
-            this.textContent = 'Hide Categories'; // Change button text
-        } else {
-            categoriesContainer.style.display = 'none';
-            this.textContent = 'Show Categories'; // Change button text back
-        }
-      });
-
-      document.getElementById('ItemImg').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        const imagePreview = document.getElementById('image-preview');
-        const imagePreviewContainer = document.getElementById('image-preview-container');
-
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            imagePreview.src = e.target.result; // Set the image source to the uploaded file
-            imagePreviewContainer.style.display = 'block'; // Show the preview container
-          };
-          reader.readAsDataURL(file); // Read the file as a data URL
-        } else {
-          imagePreviewContainer.style.display = 'none'; // Hide the preview if no file is selected
-        }
-      });
-
-      let additionalImagesArray = []; // Array to store the file paths
-
-      document.getElementById('add-image-button').addEventListener('click', function() {
-        const fileInput = document.getElementById('ItemImgs');
-        const files = fileInput.files;
-
-        // Check if a file is selected
-        if (files.length === 0) {
-          alert('Please select an image to add.');
-          return;
-        }
-
-        const file = files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.maxWidth = '100px'; // Set a fixed width for the preview
-          img.style.margin = '5px'; // Add some margin
-          additionalImagesArray.push(e.target.result); // Store the image data in the array
-          document.getElementById('additional-images-preview').appendChild(img); // Append the image to the preview container
-        };
-
-        reader.readAsDataURL(file); // Read the file as a data URL
-
-        // Show the preview container if it's the first image
-        document.getElementById('additional-images-preview-container').style.display = 'block';
-
-        // Clear the file input for the user to upload another image
-        fileInput.value = '';
-      });
-
-      document.querySelector('form').addEventListener('submit', function() {
-        // Convert the array to a hidden input to send with the form
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'ItemImgs'; // This should match your schema
-        hiddenInput.value = JSON.stringify(additionalImagesArray); // Convert to JSON string
-        this.appendChild(hiddenInput);
-      });
-    </script>
+    <%- include('../partials/_toggle-categories.ejs') %>  
   </body>
 </html>
