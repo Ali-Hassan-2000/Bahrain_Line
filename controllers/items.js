@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 // render create item page
 router.get('/new_item', isSignedIn, async (req, res) => {
   try{
-      const categories = await Category.find(); // Fetch categories from the database
+      const categories = await Category.find();
       
       res.render('items/new_item.ejs', {
         categories,

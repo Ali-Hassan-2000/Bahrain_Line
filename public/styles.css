@@ -275,9 +275,8 @@ section .section-title {
     background: darkred; /* Light pink on hover */
 }
 /* ----------------admin action-------------------*/
-/* Styles specific to the Show Item page */
 .show-item-layout {
-    display: flex; /* Use Flexbox for layout */
+    display: flex; 
     max-width: 1400px; /* Maximum width for the container */
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -285,25 +284,25 @@ section .section-title {
 }
 
 .item-image {
-    width: 65%; /* Set the width to 75% of the page */
-    display: flex; /* Use flexbox for layout */
+    width: 65%; 
+    display: flex;
     flex-wrap: wrap; /* Allow images to wrap */
     justify-content: center; /* Center images horizontally */
     margin: 0 auto; /* Center the container */
-    gap: 10px; /* Space between images */
+    gap: 10px;
 }
 
 .item-image img {
-    width: 400px; /* Increase the width of images */
-    height: auto; /* Maintain aspect ratio */
-    border: 20px solid black; /* Black border */
+    width: 400px; 
+    height: auto; 
+    border: 20px solid black; 
     object-fit: cover; /* Ensure images fit within the defined width */
-    margin: 5px; /* Margin around each image */
+    margin: 5px; 
 }
 
 .menu-details {
     flex: 1; /* Take up the other half */
-    padding: 40px; /* Add padding for spacing */
+    padding: 40px; 
     display: flex;
     flex-direction: column; /* Stack content vertically */
 }
@@ -313,13 +312,13 @@ section .section-title {
 }
 
 .menu-details h2{
-    margin: 5px 0; /* Space between headings */
+    margin: 5px 0; 
     font-family: initial;
 }
 
 .menu-details p {
-    margin-top: 10px; /* Space above description */
-    line-height: 1.5; /* Improve readability */
+    margin-top: 10px; 
+    line-height: 1.5; 
     font-family: initial;
 }
 /* ----------------show item-------------------*/
@@ -328,7 +327,7 @@ section .section-title {
     padding: 40px;
     border-radius: var(--border-radius-m);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    width: 350px; /* Slightly wider for better layout */
+    width: 350px; 
     text-align: center;
     margin: auto; /* Center the container */
     position: relative; /* Positioning for the background image */
@@ -343,7 +342,7 @@ section .section-title {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('path/to/your/background-image.jpg'); /* Add a background image */
+    background-image: url('path/to/your/background-image.jpg');
     background-size: cover;
     opacity: 0.1; /* Slight opacity for a subtle background */
     border-radius: var(--border-radius-m);
@@ -366,7 +365,7 @@ section .section-title {
 
 .sign-in-input {
     width: 100%;
-    padding: 12px; /* More padding for comfort */
+    padding: 12px; 
     margin-bottom: 20px;
     border: 2px solid var(--secondary-color);
     border-radius: var(--border-radius-s);
@@ -384,7 +383,7 @@ section .section-title {
     background-color: var(--secondary-color);
     color: var(--white-color);
     border: none;
-    padding: 14px 20px; /* Increased padding for buttons */
+    padding: 14px 20px;
     border-radius: var(--border-radius-m);
     cursor: pointer;
     font-size: var(--font-size-m);
@@ -396,9 +395,9 @@ section .section-title {
 }
 /* ----------------sign pages-------------------*/
 .styled-image {
-  border: 7px solid black; /* Black border */
-  width: 60px; /* Make images smaller */
-  height: auto; /* Maintain aspect ratio */
+  border: 7px solid black; 
+  width: 60px; 
+  height: auto; 
   object-fit: cover; /* Ensures images fit within the defined width */
 }
 /* ----------------show item images-------------------*/
