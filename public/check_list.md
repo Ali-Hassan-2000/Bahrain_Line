@@ -5,9 +5,10 @@
 - [✓] Task 5: Implement the functions
 - [✓] Task 6: Design the app interface
 - [✓] Task 7: Implement cloudinary
-- [X] Task 8: remove sign-up, in
-- [X] Task 9: add items (pics) and categories
-- [X] Task 10: add backOffice app (supplier app) (future)
-- [X] Task 11: add functions for backOffice (future)
-- [X] Task 12: Design backOffice app (future)
-- [X] Task 13: Prepare documentation
+- [✓] Task 8: Deploy the app
+- [X] Task 9: remove sign-up, in
+- [✓] Task 10: add items (pics) and categories
+- [X] Task 11: add backOffice app (supplier app) (future)
+- [X] Task 12: add functions for backOffice (future)
+- [X] Task 13: Design backOffice app (future)
+- [✓] Task 14: Prepare documentation
