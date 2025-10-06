@@ -4,8 +4,8 @@ Bahrain Line is an app for traditional and handicrafts shops, showcasing a varie
 ## Overview
 Bahrain Line is a web-based application dedicated to promoting traditional crafts and handicrafts from Bahrain. The app serves as a digital marketplace where users can explore a rich variety of authentic products made by local artisans. With a focus on preserving cultural heritage, Bahrain Line provides a platform for artisans to showcase their work, enabling users to support local craftsmanship while enjoying a seamless shopping experience. The user-friendly interface makes it easy to browse categories, view product details, and make secure purchases, all while celebrating the unique artistry of Bahrain.
 
-[Web link]()
-![main page]()
+[Web link](https://bahrain-line-f00944856757.herokuapp.com/)
+![main page](https://res.cloudinary.com/dnmdmz7qo/image/upload/v1759767978/34bdd520-38ad-4d37-ac73-56ab1ca8da54.png)
 
 ## Table of Contents
 - [Features](#features)
