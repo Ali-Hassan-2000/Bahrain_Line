@@ -8,7 +8,7 @@ Bahrain Line is a web-based application dedicated to promoting traditional craft
 ![main page](https://res.cloudinary.com/dnmdmz7qo/image/upload/v1759767978/34bdd520-38ad-4d37-ac73-56ab1ca8da54.png)
 
 ## Table of Contents
-- [Features](#features)
+- [Features](#features) 
 - [Usage Instructions](#usage-instructions)
 - [Functions Overview](#functions-overview)
 - [Technologies Used](#technologies-used)
